@@ -3,16 +3,13 @@ package com.ambcard.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name="transaction")
-public class TransactionsEntity {
+public class TransactionEntity {
 
     @Id
     @GeneratedValue(generator="system-uuid")
@@ -22,10 +19,11 @@ public class TransactionsEntity {
 
     private double value;
     private TYPE_TRANSACTION type;
-    private UUID store;
-    private UUID wallet;
 
-    private Date date;
+    private UUID storeId;
+    private UUID walletId;
+
+    private Date data;
 
     public UUID getId() {
         return id;
@@ -51,27 +49,32 @@ public class TransactionsEntity {
         this.type = type;
     }
 
-    public UUID getStore() {
-        return store;
+    public UUID getStoreId() {
+        return storeId;
     }
 
-    public void setStore(UUID store) {
-        this.store = store;
+    public void setStoreId(UUID storeId) {
+        this.storeId = storeId;
     }
 
-    public UUID getWallet() {
-        return wallet;
+    public UUID getWalletId() {
+        return walletId;
     }
 
-    public void setWallet(UUID wallet) {
-        this.wallet = wallet;
+    public void setWalletId(UUID walletId) {
+        this.walletId = walletId;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getData() {
+        return data;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setData(Date data) {
+        this.data = data;
+    }
+
+    @PrePersist
+    public void ajustsPrePersist(){
+        this.data = new Date(System.currentTimeMillis());
     }
 }
