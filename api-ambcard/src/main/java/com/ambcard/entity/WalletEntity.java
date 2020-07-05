@@ -18,10 +18,21 @@ public class WalletEntity {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Type(type="uuid-char")
     private UUID id;
-
+    
+    @Type(type="uuid-char")
     private UUID customerId;
 
     private String cpf;
+    private String cardNum;
+
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
 
     public String getCpf() {
         return cpf;

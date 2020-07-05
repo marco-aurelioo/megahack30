@@ -19,8 +19,9 @@ public class TransactionEntity {
 
     private double value;
     private TYPE_TRANSACTION type;
-
+    @Type(type="uuid-char")
     private UUID storeId;
+    @Type(type="uuid-char")
     private UUID walletId;
 
     private Date data;

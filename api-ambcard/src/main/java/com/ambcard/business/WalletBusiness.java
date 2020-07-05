@@ -2,6 +2,7 @@ package com.ambcard.business;
 
 import com.ambcard.entity.WalletEntity;
 import com.ambcard.model.Wallet;
+import com.ambcard.repository.TransactionRepository;
 import com.ambcard.repository.WalletRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class WalletBusiness {
 
     @Autowired
     private WalletRepository repositoryCRUD;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
 
     public Wallet createWallet(Wallet wallet){
         WalletEntity entity = fromPojo(wallet);
@@ -39,11 +43,13 @@ public class WalletBusiness {
         Optional<WalletEntity> entityOptional = repositoryCRUD.findById(id);
         if(entityOptional.isPresent()){
             Wallet wallet = fromEntity(entityOptional.get());
+            wallet.setBalance(getBalance(id));
             return wallet;
         }else{
             throw new RuntimeException("wallet not found.");
         }
     }
+
 
     public Wallet update(Wallet wallet, String uuid) {
         UUID id = UUID.fromString(uuid);
@@ -78,4 +84,9 @@ public class WalletBusiness {
         BeanUtils.copyProperties(wallet,entity);
         return entity;
     }
+
+    private Double getBalance(UUID uuid) {
+        return transactionRepository.sumTransactionsByWallet(uuid);
+    }
+
 }
