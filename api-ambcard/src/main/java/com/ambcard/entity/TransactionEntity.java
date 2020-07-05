@@ -13,14 +13,16 @@ public class TransactionEntity {
 
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type="uuid-char")
     private UUID id;
 
     private double value;
     private TYPE_TRANSACTION type;
+
     @Type(type="uuid-char")
     private UUID storeId;
+
     @Type(type="uuid-char")
     private UUID walletId;
 

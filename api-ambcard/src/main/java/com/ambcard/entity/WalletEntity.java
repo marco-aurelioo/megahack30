@@ -3,10 +3,7 @@ package com.ambcard.entity;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
@@ -15,16 +12,15 @@ public class WalletEntity {
 
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid",strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type="uuid-char")
     private UUID id;
-    
+
     @Type(type="uuid-char")
     private UUID customerId;
 
     private String cpf;
     private String cardNum;
-
 
     public String getCardNum() {
         return cardNum;

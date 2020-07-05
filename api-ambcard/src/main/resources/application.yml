@@ -4,6 +4,12 @@ server:
         enabled: true
 
 spring:
+    servlet:
+        multipart:
+            max-request-size: 15MB
+            max-file-size: 20MB
+            file-size-threshold: 2KB
+            enabled: true
     application:
         name: api-ambcard
     datasource:
@@ -16,5 +22,6 @@ spring:
     h2:
         console:
             enabled: true
-
+file:
+    upload-dir: ~/uploads
 

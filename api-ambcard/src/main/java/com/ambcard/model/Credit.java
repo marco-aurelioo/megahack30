@@ -4,16 +4,21 @@ import java.util.UUID;
 
 public class Credit {
 
-    private double valor;
+    private double value;
     private UUID storeId;
     private UUID walletId;
 
-    public double getValor() {
-        return valor;
+    public Credit(UUID walletId,double value){
+        this.walletId = walletId;
+        this.value = value;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 
     public UUID getStoreId() {
